@@ -1,0 +1,174 @@
+%\section{How is cointegration tested?}
+%\section{Cointegration test}
+\section{How?}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Johansen test}
+	\small
+	\begin{itemize}
+		\item \textbf{Goal}: We need a formal test to find out if cointegration exists and, if so, how many (i.e., how many ``leashes").
+		
+		\item \textbf{Test}: The Johansen test (Section 5.9) is the standard tool.
+		
+		\item \textbf{The model}: Vector Error-Correction Model (VECM) form (from Section 5.6):
+		$$\Delta z_t = \boldsymbol{\Pi} z_{t-1} + \sum_{i=1}^{p-1} \boldsymbol{\Phi_i}^* \Delta z_{t-i} + c(t) + \boldsymbol{\Theta(B)}a_t$$
+		
+		\item \textbf{Objective}: To check for the rank ($m$) of the $\boldsymbol{\Pi}$ matrix which is the number of cointegrating vectors.
+		\begin{itemize}
+			\item If $\text{Rank}(\boldsymbol{\Pi}) = 0$, the series are not cointegrated.
+			
+			\item If $\text{Rank}(\boldsymbol{\Pi}) = m > 0$, there are $m$ cointegrating vectors.
+		\end{itemize}
+	\end{itemize}
+	\framebreak
+	
+	\begin{itemize}
+		\item \textbf{Test statistics}: The test produces two statistics (Section 5.9.4):
+		\begin{enumerate}
+			\item Trace statistic ($L_{tr}$): Tests 
+			$$H_0: \text{Rank} = m\ vs.\ H_a: \text{Rank} > m$$
+			
+			\item Max-Eigenvalue statistic ($L_{max}$): Tests 
+			$$H_0: \text{Rank} = m\ vs.\ H_a: \text{Rank} = m+1$$
+		\end{enumerate}
+		
+		\item $L_{tr}(m) = -(T - kp) \sum_{i=m+1}^{k} \ln(1 - \lambda_i)$
+		
+		\item $L_{max}(m) = -(T - kp) \ln(1 - \lambda_{m+1})$
+		\item We keep testing sequentially for all values of \textit{m} until it reaches Rank($\boldsymbol{\Pi}$).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Example}
+	\small
+		
+	\textbf{Setup:}
+	We have two nonstationary (\(I(1)\)) series \(z_t = (z_{1t}, z_{2t})'\), and we wish to test for the number of cointegrating relationships.
+	
+	\textbf{Step 1: Set up the ECM Model}
+	Choose a VAR order \(p = 2\). Based on the text, the Error-Correction Model (ECM) is:
+	\[
+	\Delta z_t = c_0 + \boldsymbol{\Pi} z_{t-1} + \boldsymbol{\Phi}_1^* \Delta z_{t-1} + a_t
+	\]
+	Our goal is to determine the \emph{rank} (\(m\)) of the \(2\times2\) matrix \(\boldsymbol{\Pi}\):
+	\begin{itemize}
+		\item \(m = 0\): no cointegration,
+		\item \(m = 1\): one cointegrating vector,
+		\item \(m = 2\): both series are stationary.
+	\end{itemize}
+	
+	\framebreak
+	\textbf{Step 2: Run ``Helper'' Regressions}
+	We cannot test \(\boldsymbol{\Pi}\) directly. We first concentrate out short-run dynamics:
+	\begin{enumerate}
+		\item Regress \(\Delta z_t\) on a constant and \(\Delta z_{t-1}\); save residuals \(\hat{u}_t\).
+		\item Regress \(z_{t-1}\) on a constant and \(\Delta z_{t-1}\); save residuals \(\hat{v}_t\).
+	\end{enumerate}
+
+	\framebreak
+	\textbf{Step 3: Compute Covariance Matrices}
+	From the residuals, we compute sample covariance matrices (hypothetical values):
+	\[
+	\hat{\Sigma}_{00} = 
+	\begin{bmatrix}
+		4 & 1\\
+		1 & 3
+	\end{bmatrix}, \quad
+	\hat{\Sigma}_{11} =
+	\begin{bmatrix}
+		5 & 2\\
+		2 & 2
+	\end{bmatrix}, \quad
+	\hat{\Sigma}_{01} =
+	\begin{bmatrix}
+		3 & 1.5\\
+		1 & 1
+	\end{bmatrix}, \quad
+	\hat{\Sigma}_{10} = \hat{\Sigma}_{01}' =
+	\begin{bmatrix}
+		3 & 1\\
+		1.5 & 1
+	\end{bmatrix}
+	\]
+	
+	\framebreak
+	\textbf{Step 4: Solve the Eigenvalue Problem}
+	The Johansen test uses the eigenvalues of
+	\[
+	S = \hat{\Sigma}_{11}^{-1}\hat{\Sigma}_{10}\hat{\Sigma}_{00}^{-1}\hat{\Sigma}_{01}.
+	\]
+	
+	\framebreak
+	\textbf{Calculations:}
+	\begin{enumerate}
+		\item Find inverses:
+		\[
+		|\hat{\Sigma}_{00}| = 11, \quad 
+		\hat{\Sigma}_{00}^{-1} = \tfrac{1}{11}
+		\begin{bmatrix}
+			3 & -1\\
+			-1 & 4
+		\end{bmatrix}, \quad
+		|\hat{\Sigma}_{11}| = 6, \quad
+		\hat{\Sigma}_{11}^{-1} = \tfrac{1}{6}
+		\begin{bmatrix}
+			2 & -2\\
+			-2 & 5
+		\end{bmatrix}
+		\]
+		\item Multiply to obtain:
+		\[
+		S =
+		\begin{bmatrix}
+			0.3636 & 0.1591\\
+			0.2273 & 0.1932
+		\end{bmatrix}
+		\]
+		\item Eigenvalues of \(S\):
+		\[
+		\lambda_1 \approx 0.487, \qquad \lambda_2 \approx 0.070
+		\]
+	\end{enumerate}
+	
+	\framebreak
+	\textbf{Step 5: Compute Test Statistics}
+	
+	Effective sample size: \(T - kp = 196\).
+	
+	\textbf{Trace Statistic:}
+	$$L_{\mathrm{tr}}(0) = -196 \left[\ln(1 - 0.487) + \ln(1 - 0.070)\right]$$
+	$$= -196[-0.667 - 0.072] \approx \mathbf{144.8}$$
+	
+	$$L_{\mathrm{tr}}(1) = -196 \ln(1 - 0.070)
+	= -196[-0.072] \approx \mathbf{14.1}$$
+	
+	\textbf{Max-Eigenvalue Statistic:}
+	$$L_{\max}(0) = -196 \ln(1 - 0.487)
+		= -196[-0.667] \approx \mathbf{130.7}$$
+		
+	$$L_{\max}(1) = -196 \ln(1 - 0.070)
+	= -196[-0.072] \approx \mathbf{14.1}$$
+	
+	\framebreak
+	\textbf{Step 6: Compare with Critical Values}
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{lcccc}
+		\hline
+		\textbf{Hypothesis} & \textbf{Statistic} & \textbf{Value} & \textbf{5\% CV} & \textbf{Decision}\\
+		\hline
+		\multicolumn{5}{l}{\textit{Trace Test}}\\
+		$H_0: m=0$ & $L_{\mathrm{tr}}(0)$ & 144.8 & 17.95 & Reject $H_0$\\
+		$H_0: m \le 1$ & $L_{\mathrm{tr}}(1)$ & 14.1 & 8.18 & Reject $H_0$\\[2mm]
+		\multicolumn{5}{l}{\textit{Max-Eigen Test}}\\
+		$H_0: m=0$ & $L_{\max}(0)$ & 130.7 & 14.90 & Reject $H_0$\\
+		$H_0: m=1$ & $L_{\max}(1)$ & 14.1 & 8.18 & Reject $H_0$\\
+		\hline
+	\end{tabular}
+	
+	\framebreak
+	\textbf{Conclusion}
+	Since both tests reject \(H_0\) for \(m=0\) and \(m=1\), we conclude that the rank is \(m=2\).  
+	Therefore, the original bivariate system \(z_t\) is stationary (\(I(0)\)) and has full rank.
+\end{frame}

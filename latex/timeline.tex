@@ -1,0 +1,65 @@
+\section{Timeline}
+% "Cointegration shared" ≈ long-term equilibrium
+% "Cointegration correlated" ≈ Correlation in short-term behavior ≈ short-term dynamics
+
+\begin{frame}{Timeline}
+	\begin{center}
+		\begin{tikzpicture}
+			% Timeline line
+			\draw[thick] (0,0) -- (8,0);
+			
+			% Events
+			\foreach \x/\year/\label in {0/\small Week 1/\small Kickoff, 2/\small Week 2/\small Stationarity, 4/\small Week 3/\small Johansen, 6/\small Week 4/\small ECM, 8/\small Week 5/\small Wrap-up} {
+				\draw[fill=ritsumeikan] (\x,0) circle (4pt);
+				\node[above] at (\x,0.2) {\textbf{\year}};
+				\node[below] at (\x,-0.2) {\label};
+			}
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Week 1}
+	\textbf{Period: }(Oct 7 – Oct 13)
+	\begin{itemize}
+		\item Team discussion \& work distribution (who handles dataset search, coding, slides, etc.).
+		\item Finalize dataset (e.g., macroeconomic/financial variables).
+		\item Everyone revises basics: stationarity, ADF/PP tests, cointegration concept.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Week 2}
+	\textbf{Period: }(Oct 14 – Oct 20)
+	\begin{itemize}
+		\item Perform unit root tests (ADF/PP) on chosen variables.
+		\item Share results among team \& discuss division of analysis.
+		\item Start applying Engle–Granger 2-step test for initial cointegration check.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Week 3}
+	\textbf{Period: }(Oct 21 – Oct 27)
+	\begin{itemize}
+		\item Run Johansen cointegration test for multiple series.
+		\item Identify cointegrating vectors \& interpret results.
+		\item Team sync-up: assign one subgroup to results interpretation and one to visuals/plots.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Week 4}
+	\textbf{Period: }(Oct 28 – Nov 3)
+	\begin{itemize}
+		\item Develop Error Correction Model (ECM) to show short-run vs long-run dynamics.
+		\item Validate with diagnostic checks and finalize output tables/graphs.
+		\item Start making presentation slides (intro, methodology, results, discussion).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Week 5}
+	\textbf{Period: }(Nov 4 – Nov 7)
+	\begin{itemize}
+		\item Team discussion \& rehearsal: combine slides from all members.
+		\item Final check: clarity, timing, flow of presentation.
+		\item Submit final slides/report if required.
+		\item Practice dry run before presentation day.
+	\end{itemize}
+\end{frame}

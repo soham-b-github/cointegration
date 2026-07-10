@@ -1,0 +1,173 @@
+%\section{Cointegration}
+%\section{What is cointegration?}
+\section{What?}
+
+\subsection{Definition}
+\begin{frame}[allowframebreaks]
+	\frametitle{Co-integration}
+	\centering
+	What is \textbf{Co-integration}?
+	\framebreak
+	
+	\textbf{Definition}: Two time series $X_t$, $Y_t$ are cointegrated if:
+	\begin{itemize}
+		\item Each series is \textbf{integrated of order 1} [\textit{I(1)}] $\rightarrow$ they become stationary after first differencing.
+		\item $\exists$ a linear combination, say $u_t = Y_t$ - $\beta X_t$, which becomes \textbf{stationary [I(0)]}.
+	\end{itemize}
+	\framebreak
+	
+	\begin{itemize}
+		\item A vector of \texttt{k} time series is said to be \textbf{cointegrated} if \textit{individual components are non-stationary} but $\exists$ a linear combination $\beta$ such that $w_t = \beta'z_t$ is \textit{stationary}.
+		
+		\item If there are \texttt{m} such vectors linearly independent, it means that $\exists$ \texttt{m} cointegrating relationships and \texttt{k-m} sources of non-stationarity.
+	\end{itemize}
+	\framebreak
+	
+	\textbf{Examples}
+	\begin{itemize}
+		\item Purchasing power parity.
+		\item Pair trading in stock market.
+		\item Income and consumption.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Role of cointegration}
+	Cointegration is about long-run equilibrium relationships between non-stationary I(1) variables.
+	
+	\begin{itemize}
+		\item If two or more series share a \textit{common stochastic trend}, then some \textbf{linear combination} of them will be \textbf{stationary I(0)}.
+		$$y_t \sim I(1),\ x_t \sim I(1)\ but\ (y_t - \beta x_t) \sim I(0)$$
+		
+		\item Cointegration does not depend on whether each individual time series is AR, MA or ARMA. Their order of integration matters.
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Example}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Example}
+	
+	Consider a \textbf{bivariate (k=2) VARMA(1,1)}
+	
+	$$
+	\begin{bmatrix} z_{1t} \\ z_{2t} \end{bmatrix} -
+	\begin{bmatrix} 0.5 & -1.0 \\ -0.25 & 0.5 \end{bmatrix}
+	\begin{bmatrix} z_{1,t-1} \\ z_{2,t-1} \end{bmatrix} =
+	\begin{bmatrix} a_{1t} \\ a_{2t} \end{bmatrix} -
+	\begin{bmatrix} 0.2 & -0.4 \\ -0.1 & 0.2 \end{bmatrix}
+	\begin{bmatrix} a_{1,t-1} \\ a_{2,t-1} \end{bmatrix}$$
+	
+	This is in the form $\Phi(B)z_t = \Theta(B)a_t$, where $\Phi(B)$ is the AR coefficient matrix \& $\Theta(B)$ is the white noise coefficient matrix.
+	
+	\framebreak
+	
+	\textbf{The system is nonstationary}
+	
+	\textbf{Observations}
+	\begin{itemize}
+		\item The AR coefficient matrix $\Phi$ has eigenvalues of 0 and 1. 
+		\item The eigenvalue of 1 causes non-stationarity.
+		\item The eigenvectors are (1.0, -2.0)$^t$ \& (0.5, 1.0)$^t$ corresponding to the eigenvalues 0 \& 1 respectively.
+	\end{itemize}
+	
+	\framebreak
+	
+	We apply a special transformation matrix $L$ to create a new system 
+	
+	$y_t$:$$\begin{bmatrix} y_{1t} \\ y_{2t} \end{bmatrix} =
+	\begin{bmatrix} 1.0 & -2.0 \\ 0.5 & 1.0 \end{bmatrix}
+	\begin{bmatrix} z_{1t} \\ z_{2t} \end{bmatrix} \quad \text{or} \quad y_t = Lz_t$$
+	
+	\framebreak
+	
+	So, L = $$\begin{bmatrix} 1.0 & -2.0 \\ 0.5 & 1.0 \end{bmatrix}$$ and let $y_t = Lz_t$.
+	
+	So,
+	$$y_{1t} = 1.0 z_{1t} - 2.0 z_{2t}$$
+	$$y_{2t} = 0.5 z_{1t} + 1.0 z_{2t}$$
+	
+	\begin{itemize}
+		\item $y_{1t} \implies$ common trend due to I(1) non-stationarity.
+		\item $y_{2t} \implies$ white noise due to I(0) stationarity.
+	\end{itemize}
+	
+	%The $\Pi$ matrix is singular: As we learned, $\Pi = -\Phi(1) = -(I - \Phi_1)$. The text states $|\Phi(1)| [cite_start]= 0$, which confirms the system has a unit root and is nonstationary4.
+	
+	%\framebreak
+	
+	%Now, proving the Individual Series are $I(1)$.
+	
+	%Through algebraic manipulation, we get
+	
+	%$$\begin{bmatrix} 1-B & 0 \\ 0 & 1-B \end{bmatrix}
+	%\begin{bmatrix} z_{1t} \\ z_{2t} \end{bmatrix} =
+	%\begin{bmatrix} 1-0.7B & -0.6B \\ -0.15B & 1-0.7B \end{bmatrix}
+	%\begin{bmatrix} a_{1t} \\ a_{2t} \end{bmatrix}$$This equation shows that $(1-B)z_t = \Delta z_t$ is a stationary VMA(1) process.
+	
+	%Interpretation: Because you have to difference $z_{1t}$ and $z_{2t}$ to make them stationary, this proves that both $z_{1t}$ and $z_{2t}$ are $I(1)$ (unit-root) processes6. This is the setup for a spurious regression: we have two $I(1)$ series.
+	
+	
+	
+	%Why this specific matrix? It was specially chosen to "uncover" the hidden structure. When you apply this transformation to the original VARMA(1,1) model, the math simplifies to Equation (5.64):$$\begin{bmatrix} y_{1t} \\ y_{2t} \end{bmatrix} -
+	%\begin{bmatrix} 1.0 & 0 \\ 0 & 0 \end{bmatrix}
+	%\begin{bmatrix} y_{1,t-1} \\ y_{2,t-1} \end{bmatrix} =
+	%\begin{bmatrix} b_{1t} \\ b_{2t} \end{bmatrix} -
+	%\begin{bmatrix} 0.4 & 0 \\ 0 & 0 \end{bmatrix}
+	%\begin{bmatrix} b_{1,t-1} \\ b_{2,t-1} \end{bmatrix}$$where $b_t = La_t$ is the new white noise term7.Part 4: The Result — Interpreting the New SystemThis new, diagonal system is easy to interpret. Let's look at the equation for each $y_t$ variable separately:Equation for $y_{1t}$:$y_{1t} - 1.0 y_{1,t-1} = b_{1t} - 0.4 b_{1,t-1}$This is a nonstationary ARIMA(0,1,1) model. This series $y_{1t}$ is the common trend that drives both $z_{1t}$ and $z_{2t}$.Equation for $y_{2t}$:$y_{2t} - 0 y_{2,t-1} = b_{2t} - 0 b_{2,t-1}$This simplifies to $y_{2t} = b_{2t}$. Since $b_{2t}$ is just white noise (a linear combination of $a_t$), this equation shows that $y_{2t}$ is stationary ($I(0)$)8.Part 5: The Grand Conclusion — Cointegration!This is the final step that ties it all together:We proved in Part 2 that $z_{1t}$ and $z_{2t}$ are both $I(1)$.We proved in Part 4 that the linear combination $y_{2t} = 0.5 z_{1t} + 1.0 z_{2t}$ is $I(0)$ (stationary).By definition, if a linear combination of $I(1)$ series is $I(0)$, the series are cointegrated.The cointegrating vector (the "leash") is $\beta' = [0.5, 1.0]$9.The common trend (the "person" everyone is following) is $y_{1t} = 1.0 z_{1t} - 2.0 z_{2t}$10.
+\end{frame}
+
+\subsection{Method}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Error Correction Model (ECM)}
+	\begin{itemize}
+		\item \textit{Engle-Granger} suggested the \textbf{ECM form}. This is a different algebraic representation for the same \texttt{VARMA} model that is \textbf{stationary} and \textbf{invertible}.
+		
+		\item ECM form of a VARMA(p,q) model (VECM itself):
+		$$\Delta z_t = \boldsymbol{\Pi} z_{t-1} + \sum_{i=1}^{p-1} \boldsymbol{\Phi_i}^* \Delta z_{t-i} + c(t) + \boldsymbol{\Theta(B)}a_t$$
+		
+		\item For univariate case, it is simply ECM; for \textit{multivariate} cases, it is \textbf{VECM (Vector Error Correction Model)}
+	\end{itemize}
+	
+	\framebreak
+	
+	VECM form of VARMA(p,q):
+	$$\Delta z_t = \boldsymbol{\Pi} z_{t-1} + \sum_{i=1}^{p-1} \boldsymbol{\Phi_i}^* \Delta z_{t-i} + c(t) + \boldsymbol{\Theta(B)}a_t$$
+	
+	where 
+	\begin{enumerate}
+		\item $\sum_{i=1}^{p-1} \boldsymbol{\Phi_i}^* \Delta z_{t-i}$ captures the short-run dynamics.
+		
+		\item $c(t) + \boldsymbol{\Theta(B)}a_t$ is the stationary part.
+		
+		\item $\boldsymbol{\Pi} z_{t-1}$ is the error correction term.
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]
+	\frametitle{VECM}
+	\small
+	For \textbf{VAR(2)} model,
+	$$z_t = c_0 + \boldsymbol{\phi}_1 z_{t-1} + \boldsymbol{\phi}_2 z_{t-2} + a_t$$.
+	
+	To make it stationary, we difference it once,
+	$$z_t  - z_{t-1} = c_0 + \boldsymbol{\phi}_1 z_{t-1} - z_{t-1} + \boldsymbol{\phi}_2 z_{t-2} + a_t$$
+	
+	$$\implies \Delta z_t = c_0 + (\boldsymbol{\phi}_1 - \boldsymbol{I})z_{t-1} + \boldsymbol{\phi}_2 z_{t-2} + a_t$$
+	
+	$$\implies \Delta z_t = c_0 + \boldsymbol{\Pi} z_{t-1} + \boldsymbol{\Phi}_1^* \Delta z_{t-1} + a_t$$
+	where
+	$$\boldsymbol{\Pi} = (\boldsymbol{\phi}_1 + \boldsymbol{\phi}_2 - \boldsymbol{I}),\ \boldsymbol{\Phi}_1^* = \boldsymbol{-\phi}_2$$
+	
+	\framebreak
+	
+	In general, \textbf{VECM} model looks like
+	
+	$$\Delta z_t = c(t) + \boldsymbol{\Pi} z_{t-1} + \sum_{i=1}^{p-1} \boldsymbol{\Phi}_i^* \Delta z_{t-i} + a_t$$
+	
+	where
+	
+	$$\boldsymbol{\Pi} = -(\boldsymbol{I} - \sum_{i=1}^{p} \boldsymbol{\phi}_i)\ \&\ \boldsymbol{\Phi}_i^* = -(\sum_{j=i+1}^{p}\boldsymbol{\phi}_i)$$
+\end{frame}

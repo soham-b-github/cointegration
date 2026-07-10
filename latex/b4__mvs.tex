@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A Beamer template for Ritsumeikan University       %
+% Author: Ming-Hao Xu (Xu Minghao)                   %
+% Date:   April 2022.                                %
+% LPPL Licensed.                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ------------------------------ Document format details --------------------------------------
+
+\documentclass{beamer}
+\usepackage{hyperref}
+% \usepackage[T1]{fontenc}
+\usefonttheme{serif}
+
+% other packages
+\usepackage{latexsym,amsmath,multicol,booktabs,calligra}
+\usepackage{pstricks,listings,stackengine}
+% dummy text; remove it when working on this template
+\usepackage{lipsum}
+% \usepackage[table,xcdraw,svgnames]{xcolor}  % or
+% \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}  % more named colors
+% \usepackage[html]{xcolor}  % For direct hex use
+\usepackage[table,svgnames,dvipsnames]{xcolor}
+% \usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% \usepackage{xcolor}
+\usepackage{tikz}
+
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{lmodern}
+% \usepackage[margin=1in]{geometry}
+% \usepackage{enumitem}
+% \definecolor{googleBlue}{HTML}{4285F4}
+% \definecolor{googleGreen}{HTML}{34A853}
+% \definecolor{googleYellow}{HTML}{FBBC05}
+% \definecolor{googleRed}{HTML}{EA4335}
+
+
+% --------------------------------- Title page edits ------------------------------------------
+
+% Cointegration shared = Cointegrated time series with a common cointegrating vector
+% Cointegration correlated = Spurious correlation
+
+\author[Big4]{\large \textsc{Big 4}\\
+\scriptsize \textbf{\textit{Ramakrishna Mission Vivekananda \\Educational and Research Institute Belur}}}
+\title[Cointegration]{Cointegration\\\small Uncovering long-run relationships in time series}
+
+\institute[RKMVERI Belur]{
+    \textbf{Team Members}\\
+    \texttt{Banerjee Ayan, Bhattacharya Darpan, \\Bhattacharya Soham, Bodhak Soham}
+}
+\date{\today}
+\usepackage{Ritsumeikan}
+% \usethem
+
+% ----------------------------------------- defs ---------------------------------------------
+\def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
+\def\env#1{\texttt{\color{blue}\footnotesize #1}}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{halfgray}{gray}{0.55}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries\color{deepblue},
+    emphstyle=\ttfamily\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    numbers=left,
+    numberstyle=\small\color{halfgray},
+    rulesepcolor=\color{red!20!green!20!blue!20},
+    frame=shadowbox,
+}
+
+% ------------------------------------ Document Begins ----------------------------------------
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{figure}[htpb]
+        \centering
+        \includegraphics[width=0.05\linewidth]{images/logo.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \tableofcontents[sectionstyle=show,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+\end{frame}
+
+
+% ---------------------- Content -----------------------
+% \input{timeline}
+
+\input{sec/1__basics}
+\input{sec/2__intro}
+\input{sec/3__coint}
+\input{sec/4__tests}
+
+
+% ------------------------ References --------------------------------
+
+\section{References}
+
+\begin{frame}{References}
+    \tiny
+    \bibliography{ref}
+    \bibliographystyle{ieeetr}
+    \nocite{*} % used here because no citation happens in slides
+    % if there are too many try use：
+    % \tiny\bibliographystyle{alpha}
+\end{frame}
+
+
+\begin{frame}
+    \begin{center}
+        {\Huge\calligra Thank You}
+    \end{center}
+\end{frame}
+
+\end{document}
