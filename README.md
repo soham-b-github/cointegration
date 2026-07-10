@@ -8,3 +8,6 @@ This repository explores the concept of cointegration to uncover long-run relati
 - *The Spurious Regression Trap*: Understanding how regressions between independent random walks can falsely show high correlations and shared trends rather than true economic relationships.
 - *Cointegration*: Identifying long-run equilibrium relationships between non-stationary variables.
 - *Modeling & Testing*: Utilizing Error Correction Models (ECM), Vector Error Correction Models (VECM), and the Johansen test (including Trace and Max-Eigenvalue statistics) to determine the number of cointegrating relationships. 
+
+## Authors
+#### [Ayan Banerjee](https://www.linkedin.com/in/ayan-banerjee-b8234b321/), [Darpan Bhattacharya](https://www.linkedin.com/in/darpan-bhattacharya/), [Soham Bhattacharya](https://www.linkedin.com/in/bhattacharyasoham026/) & [Soham Bodhak](https://www.linkedin.com/in/soham-bodhak/)
